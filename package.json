@@ -3,6 +3,10 @@
 	"version": "1.0.1",
 	"description": "Add a “Flex Reverse” toggle to some blocks",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:choctaw-nation/wp-flex-reverse-toggle.git"
+	},
 	"author": "K.J. Roelke",
 	"type": "module",
 	"main": "src/index.tsx",
