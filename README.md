@@ -29,6 +29,10 @@ alterBlocks();
 
 ## Changelog
 
+### v1.0.1 - [July 2, 2025]
+
+- Update dependencies
+
 ### v1.0.0 - [July 2, 2025]
 
 - First build! This component works with `core/group` and `core/columns` blocks.
