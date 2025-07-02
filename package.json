@@ -1,20 +1,41 @@
 {
 	"name": "@choctawnationofoklahoma/wp-flex-reverse-toggle",
-	"version": "1.0.1",
-	"description": "Add a “Flex Reverse” toggle to some blocks",
+	"version": "1.1.0",
+	"description": "Add a “Flex Reverse” toggle to some blocks in the Wordpress block editor.",
+	"keywords": [
+		"wordpress",
+		"block-editor",
+		"wp",
+		"toggle",
+		"gutenberg"
+	],
+	"scripts": {
+		"build": "npx tsc"
+	},
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:choctaw-nation/wp-flex-reverse-toggle.git"
 	},
 	"author": "K.J. Roelke",
-	"type": "module",
-	"main": "src/index.tsx",
+	"main": "build/index.cjs",
+	"module": "build/index.js",
+	"types": "build/index.d.ts",
+	"exports": {
+		"import": "./build/index.js",
+		"require": "./build/index.cjs"
+	},
+	"files": [
+		"build",
+		"README.md",
+		"LICENSE"
+	],
 	"prettier": "@wordpress/prettier-config",
 	"peerDependencies": {
 		"@wordpress/scripts": "^30.19.0"
 	},
 	"devDependencies": {
-		"@wordpress/prettier-config": "^4.26.0"
+		"@wordpress/prettier-config": "^4.26.0",
+		"typescript": "^5.8.3"
 	}
 }

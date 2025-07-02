@@ -29,6 +29,10 @@ alterBlocks();
 
 ## Changelog
 
+### v1.1.0 - [July 2, 2025]
+
+- Update build to allow proper imports with WP projects
+
 ### v1.0.1 - [July 2, 2025]
 
 - Update dependencies
