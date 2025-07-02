@@ -33,6 +33,7 @@ alterBlocks();
 
 - Fix: Build files are included in npm registry
 - Fix: TS errors/warnings are ignored
+- Fix: add missing dev dependencies
 
 ### v1.1.0 - [July 2, 2025]
 
