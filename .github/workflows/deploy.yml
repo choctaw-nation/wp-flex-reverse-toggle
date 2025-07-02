@@ -16,6 +16,12 @@ jobs:
                   node-version: '20'
                   registry-url: 'https://registry.npmjs.org'
 
+            - name: Install Dependencies
+              run: npm ci
+
+            - name: Build
+              run: npm run build
+
             - name: Publish to NPM
               uses: JS-DevTools/npm-publish@v3
               with:
