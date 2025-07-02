@@ -1,6 +1,6 @@
 {
 	"name": "@choctawnationofoklahoma/wp-flex-reverse-toggle",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Add a “Flex Reverse” toggle to some blocks in the Wordpress block editor.",
 	"keywords": [
 		"wordpress",
