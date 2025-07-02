@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"outDir": "build",
+		"declaration": true,
+		"declarationDir": "build",
+		"module": "ESNext",
+		"target": "ES2019",
+		"moduleResolution": "Node",
+		"esModuleInterop": true,
+		"jsx": "react-jsx"
+	},
+	"include": ["src"]
+}
