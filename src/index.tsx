@@ -3,6 +3,11 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
 import { ToggleControl, PanelBody } from '@wordpress/components';
 
+/**
+ * Adds a toggle control to reverse the flex direction of a block.
+ *
+ * @param namespace the namespace of the callback functions to run
+ */
 export default function addFlexReverseToggle(namespace: string) {
 	try {
 		new FlexReverse(namespace);
@@ -107,10 +112,10 @@ class FlexReverse {
 				<>
 					<BlockEdit {...{ ...props, style: blockStyles }} />
 					<InspectorControls>
-						<PanelBody title='Flex Direction'>
+						<PanelBody title="Flex Direction">
 							<ToggleControl
 								__nextHasNoMarginBottom
-								label='Reverse Direction'
+								label="Reverse Direction"
 								checked={isDirectionReversed}
 								onChange={(value) =>
 									setAttributes({
@@ -118,7 +123,7 @@ class FlexReverse {
 									})
 								}
 								disabled={isDisabled}
-								help='Reverses the flow of the blocks. Useful for responsive design.'
+								help="Reverses the flow of the blocks. Useful for responsive design."
 							/>
 						</PanelBody>
 					</InspectorControls>
@@ -162,7 +167,7 @@ class FlexReverse {
 	private addFlexDirectionStyles(
 		props: any,
 		blockType: any,
-		attributes: any,
+		attributes: any
 	) {
 		if (this.isAllowed(blockType.name)) {
 			try {
