@@ -1,0 +1,20 @@
+{
+  "name": "@choctawnationofoklahoma/wp-flex-reverse-toggle",
+  "version": "1.0.0",
+  "description": "Add a “Flex Reverse” toggle to some blocks",
+  "license": "MIT",
+  "author": "K.J. Roelke",
+  "type": "module",
+  "main": "src/addFlexReverseToggle.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@wordpress/block-editor": "^14.21.0",
+    "@wordpress/components": "^29.12.0",
+    "@wordpress/compose": "^7.26.0",
+    "@wordpress/hooks": "^4.26.0",
+    "@wordpress/prettier-config": "^4.26.0",
+    "@wordpress/scripts": "^30.19.0"
+  }
+}
