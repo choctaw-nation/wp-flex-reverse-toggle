@@ -29,6 +29,11 @@ alterBlocks();
 
 ## Changelog
 
+### v1.1.2 - [November 13, 2025]
+
+- Fixed: Hooks return new objects appropriately instead of mutating objects
+- Chore: Update packages
+
 ### v1.1.1 - [July 2, 2025]
 
 - Fix: Build files are included in npm registry

@@ -8,11 +8,12 @@ import { ToggleControl, PanelBody } from '@wordpress/components';
  *
  * @param namespace the namespace of the callback functions to run
  */
-export default function addFlexReverseToggle(namespace: string) {
+export default function addFlexReverseToggle( namespace: string ) {
 	try {
-		new FlexReverse(namespace);
-	} catch (error) {
-		console.error(`Error initializing RowReverse:`, error);
+		new FlexReverse( namespace );
+	} catch ( error ) {
+		// eslint-disable-next-line no-console
+		console.error( `Error initializing RowReverse:`, error );
 	}
 }
 
@@ -21,8 +22,8 @@ class FlexReverse {
 	 * The namespace of the filters
 	 */
 	namespace: string;
-	private canReverse = ['core/columns', 'core/group'];
-	constructor(namespace: string) {
+	private canReverse = [ 'core/columns', 'core/group' ];
+	constructor( namespace: string ) {
 		this.namespace = namespace;
 		this.addFlexDirectionControl();
 	}
@@ -34,28 +35,28 @@ class FlexReverse {
 		const hooks = [
 			{
 				hook: 'blocks.registerBlockType',
-				namespace: `${this.namespace}/add-flex-direction`,
-				callback: this.addFlexDirectionAttribute.bind(this),
+				namespace: `${ this.namespace }/add-flex-direction`,
+				callback: this.addFlexDirectionAttribute.bind( this ),
 			},
 			{
 				hook: 'editor.BlockEdit',
-				namespace: `${this.namespace}/with-flex-direction-control`,
-				callback: this.addFlexDirectionToggle.bind(this),
+				namespace: `${ this.namespace }/with-flex-direction-control`,
+				callback: this.addFlexDirectionToggle.bind( this ),
 			},
 			{
 				hook: 'blocks.getSaveContent.extraProps',
-				namespace: `${this.namespace}/columns-flex-direction-styles`,
-				callback: this.addFlexDirectionStyles.bind(this),
+				namespace: `${ this.namespace }/columns-flex-direction-styles`,
+				callback: this.addFlexDirectionStyles.bind( this ),
 			},
 			{
 				hook: 'editor.BlockListBlock',
-				namespace: `${this.namespace}/columns-flex-direction`,
-				callback: this.addInlineStyles.bind(this),
+				namespace: `${ this.namespace }/columns-flex-direction`,
+				callback: this.addInlineStyles.bind( this ),
 			},
 		];
-		hooks.forEach(({ hook, namespace, callback }) => {
-			addFilter(hook, namespace, callback);
-		});
+		hooks.forEach( ( { hook, namespace, callback } ) => {
+			addFilter( hook, namespace, callback );
+		} );
 	}
 
 	/**
@@ -63,23 +64,26 @@ class FlexReverse {
 	 *
 	 * @param name the name of the block
 	 */
-	private isAllowed(name: string): boolean {
-		return this.canReverse.includes(name);
+	private isAllowed( name: string ): boolean {
+		return this.canReverse.includes( name );
 	}
 
 	/**
 	 * Add 	flex-direction attribute to the block settings
 	 * @param settings the block settings
-	 * @param name the name of the block
-	 * @returns
+	 * @param name     the name of the block
+	 * @return
 	 */
-	private addFlexDirectionAttribute(settings, name: string): {} {
-		if (this.isAllowed(name)) {
-			settings.attributes = {
-				...settings.attributes,
-				isDirectionReversed: {
-					type: 'boolean',
-					default: false,
+	private addFlexDirectionAttribute( settings, name: string ): {} {
+		if ( this.isAllowed( name ) ) {
+			return {
+				...settings,
+				attributes: {
+					...settings.attributes,
+					isDirectionReversed: {
+						type: 'boolean',
+						default: false,
+					},
 				},
 			};
 		}
@@ -89,40 +93,39 @@ class FlexReverse {
 	/**
 	 * Adds a toggle control to the block inspector to reverse the flex direction
 	 */
-	private addFlexDirectionToggle = createHigherOrderComponent((BlockEdit) => {
-		return (props: any) => {
+	private addFlexDirectionToggle = createHigherOrderComponent( ( BlockEdit ) => {
+		return ( props: any ) => {
 			const { attributes, setAttributes, name } = props;
 			const { isDirectionReversed } = attributes;
-			if (!this.isAllowed(name)) {
-				return <BlockEdit {...props} />;
+			if ( ! this.isAllowed( name ) ) {
+				return <BlockEdit { ...props } />;
 			}
 			const isDisabled =
 				attributes.layout && attributes.layout.type !== 'flex';
-			const direction = getReversedDirection({
+			const direction = getReversedDirection( {
 				attributes,
 				name,
 				value: isDirectionReversed,
-			});
+			} );
 			const blockStyles = props.style || {};
-			if (null !== direction) {
-				// If the direction is not null, we set the flexDirection style
-				blockStyles.flexDirection = direction;
-			}
+			const updatedStyles = null !== direction
+				? { ...blockStyles, flexDirection: direction }
+				: blockStyles;
 			return (
 				<>
-					<BlockEdit {...{ ...props, style: blockStyles }} />
+					<BlockEdit { ...{ ...props, style: updatedStyles } } />
 					<InspectorControls>
 						<PanelBody title="Flex Direction">
 							<ToggleControl
 								__nextHasNoMarginBottom
 								label="Reverse Direction"
-								checked={isDirectionReversed}
-								onChange={(value) =>
-									setAttributes({
+								checked={ isDirectionReversed }
+								onChange={ ( value ) =>
+									setAttributes( {
 										isDirectionReversed: value,
-									})
+									} )
 								}
-								disabled={isDisabled}
+								disabled={ isDisabled }
 								help="Reverses the flow of the blocks. Useful for responsive design."
 							/>
 						</PanelBody>
@@ -130,38 +133,37 @@ class FlexReverse {
 				</>
 			);
 		};
-	}, 'addFlexDirectionToggle');
+	}, 'addFlexDirectionToggle' );
 
 	/**
 	 * Adds inline styles to the block in the Editor view to reverse the flex direction
 	 */
-	private addInlineStyles = createHigherOrderComponent((BlockListBlock) => {
-		return (props: any) => {
+	private addInlineStyles = createHigherOrderComponent( ( BlockListBlock ) => {
+		return ( props: any ) => {
 			const { attributes, name } = props;
-			if (!this.isAllowed(name)) {
-				return <BlockListBlock {...props} />;
+			if ( ! this.isAllowed( name ) ) {
+				return <BlockListBlock { ...props } />;
 			}
-			const direction = getReversedDirection({
+			const direction = getReversedDirection( {
 				attributes,
 				name,
 				value: attributes.isDirectionReversed ?? false,
-			});
+			} );
 			const blockStyles = props.style || {};
-			if (null !== direction) {
-				// If the direction is not null, we set the flexDirection style
-				blockStyles.flexDirection = direction;
-			}
+			const updatedStyles = null !== direction
+				? { ...blockStyles, flexDirection: direction }
+				: blockStyles;
 			return (
 				<BlockListBlock
-					{...props}
-					wrapperProps={{
+					{ ...props }
+					wrapperProps={ {
 						...props.wrapperProps,
-						style: blockStyles,
-					}}
+						style: updatedStyles,
+					} }
 				/>
 			);
 		};
-	}, 'addInlineStyles');
+	}, 'addInlineStyles' );
 
 	// Apply the flex-direction style on the front-end
 	private addFlexDirectionStyles(
@@ -169,24 +171,28 @@ class FlexReverse {
 		blockType: any,
 		attributes: any
 	) {
-		if (this.isAllowed(blockType.name)) {
+		if ( this.isAllowed( blockType.name ) ) {
 			try {
 				const { isDirectionReversed } = attributes;
-				if (isDirectionReversed !== undefined) {
-					const direction = getReversedDirection({
+				if ( isDirectionReversed !== undefined ) {
+					const direction = getReversedDirection( {
 						attributes,
 						value: isDirectionReversed,
 						name: blockType.name,
-					});
-					if (direction) {
-						props.style = {
-							...props.style,
-							flexDirection: direction,
+					} );
+					if ( direction ) {
+						return {
+							...props,
+							style: {
+								...props.style,
+								flexDirection: direction,
+							},
 						};
 					}
 				}
-			} catch (error) {
-				console.error(error);
+			} catch ( error ) {
+				// eslint-disable-next-line no-console
+				console.error( error );
 			}
 		}
 		return props;
@@ -204,7 +210,7 @@ type GetReversedDirectionParams =
 			};
 			value?: boolean;
 			name: 'core/group';
-	  }
+	}
 	| {
 			attributes: {
 				isDirectionReversed?: boolean;
@@ -212,43 +218,41 @@ type GetReversedDirectionParams =
 			};
 			value?: boolean;
 			name: 'core/columns';
-	  };
+	};
 
 /**
  * Returns the CSS flex-direction value based on the attributes and toggle value.
  * @param attributes passed attributes from the block
- * @param value the value of the toggle
- *  @param name the name of the block
- * @returns
+ * @param value      the value of the toggle
+ * @param name       the name of the block
+ * @return
  */
-function getReversedDirection({
+function getReversedDirection( {
 	attributes,
 	value,
 	name,
-}: GetReversedDirectionParams): string | null {
-	if ('core/group' === name) {
-		if ('flex' !== attributes.layout.type || undefined === value) {
+}: GetReversedDirectionParams ): string | null {
+	if ( 'core/group' === name ) {
+		if ( 'flex' !== attributes.layout.type || undefined === value ) {
 			return null;
 		}
-		if (false === value) {
+		if ( false === value ) {
 			return 'vertical' === attributes.layout.orientation
 				? 'column'
 				: 'row';
-		} else {
-			return 'vertical' === attributes.layout.orientation
-				? 'column-reverse'
-				: 'row-reverse';
 		}
+		return 'vertical' === attributes.layout.orientation
+			? 'column-reverse'
+			: 'row-reverse';
 	}
-	if ('core/columns' === name) {
-		if (undefined === attributes.isDirectionReversed) {
+	if ( 'core/columns' === name ) {
+		if ( undefined === attributes.isDirectionReversed ) {
 			return null;
 		}
-		if (attributes.isDirectionReversed) {
+		if ( attributes.isDirectionReversed ) {
 			return 'row-reverse';
-		} else {
-			return 'row';
 		}
+		return 'row';
 	}
 	return null;
 }
