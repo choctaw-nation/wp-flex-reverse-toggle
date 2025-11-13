@@ -108,13 +108,12 @@ class FlexReverse {
 				value: isDirectionReversed,
 			} );
 			const blockStyles = props.style || {};
-			if ( null !== direction ) {
-				// If the direction is not null, we set the flexDirection style
-				blockStyles.flexDirection = direction;
-			}
+			const updatedStyles = null !== direction
+				? { ...blockStyles, flexDirection: direction }
+				: blockStyles;
 			return (
 				<>
-					<BlockEdit { ...{ ...props, style: blockStyles } } />
+					<BlockEdit { ...{ ...props, style: updatedStyles } } />
 					<InspectorControls>
 						<PanelBody title="Flex Direction">
 							<ToggleControl
@@ -151,16 +150,15 @@ class FlexReverse {
 				value: attributes.isDirectionReversed ?? false,
 			} );
 			const blockStyles = props.style || {};
-			if ( null !== direction ) {
-				// If the direction is not null, we set the flexDirection style
-				blockStyles.flexDirection = direction;
-			}
+			const updatedStyles = null !== direction
+				? { ...blockStyles, flexDirection: direction }
+				: blockStyles;
 			return (
 				<BlockListBlock
 					{ ...props }
 					wrapperProps={ {
 						...props.wrapperProps,
-						style: blockStyles,
+						style: updatedStyles,
 					} }
 				/>
 			);
@@ -212,7 +210,7 @@ type GetReversedDirectionParams =
 			};
 			value?: boolean;
 			name: 'core/group';
-	  }
+	}
 	| {
 			attributes: {
 				isDirectionReversed?: boolean;
@@ -220,7 +218,7 @@ type GetReversedDirectionParams =
 			};
 			value?: boolean;
 			name: 'core/columns';
-	  };
+	};
 
 /**
  * Returns the CSS flex-direction value based on the attributes and toggle value.
