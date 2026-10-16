@@ -29,6 +29,11 @@ alterBlocks();
 
 ## Changelog
 
+### v1.1.3 - [October 16, 2026]
+
+- Fixed: Plugin is compatible with FSE Site Editor views
+- Chore: Update packages.
+
 ### v1.1.2 - [November 13, 2025]
 
 - Fixed: Hooks return new objects appropriately instead of mutating objects

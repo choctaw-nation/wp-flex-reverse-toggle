@@ -1,16 +1,21 @@
 {
 	"compilerOptions": {
-		"outDir": "build",
-		"declaration": true,
-		"declarationDir": "build",
-		"module": "ESNext",
-		"target": "ES2019",
-		"moduleResolution": "Node",
+		"target": "es6",
+		"lib": [ "dom", "dom.iterable", "esnext" ],
+		"allowJs": true,
+		"checkJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
 		"esModuleInterop": true,
-		"jsx": "react-jsx",
-		"skipLibCheck": true, // Ignore type checking of declaration files
-		"noEmitOnError": false, // Allow emitting files even if there are errors
-		"typeRoots": ["./node_modules/@types", "./src/types"]
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"noImplicitAny": false,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve"
 	},
-	"include": ["src"]
+	"include": [ "src/**/*" ],
+	"exclude": [ "node_modules" ]
 }
