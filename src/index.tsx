@@ -227,6 +227,7 @@ type GetReversedDirectionParams =
 			name: 'core/columns';
 	  };
 
+/* eslint-disable jsdoc/check-param-names */
 /**
  * Returns the CSS flex-direction value based on the attributes and toggle value.
  * @param attributes passed attributes from the block
