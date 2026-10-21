@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.0 - [October 21, 2026]
+
+- Breaking: Dropped support for CommonJS in favor of ESM
+- Fixed: Package exports are linked as expected
+
 ## v1.1.5 - [October 21, 2026]
 
 - Fixed: Package exports as expected
