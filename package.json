@@ -1,6 +1,6 @@
 {
 	"name": "@choctawnationofoklahoma/wp-flex-reverse-toggle",
-	"version": "1.1.5",
+	"version": "2.0.0",
 	"description": "Add a “Flex Reverse” toggle to some blocks in the Wordpress block editor.",
 	"keywords": [
 		"wordpress",
@@ -11,7 +11,7 @@
 	],
 	"scripts": {
 		"lint:js": "npx eslint --fix",
-		"build": "npx tsc"
+		"build": "tsc"
 	},
 	"license": "MIT",
 	"repository": {
@@ -19,12 +19,14 @@
 		"url": "git+ssh://git@github.com/choctaw-nation/wp-flex-reverse-toggle.git"
 	},
 	"author": "K.J. Roelke",
-	"main": "build/index.cjs",
-	"module": "build/index.js",
-	"types": "build/index.d.ts",
+	"main": "./build/index.js",
+	"type": "module",
+	"types": "./build/index.d.ts",
 	"exports": {
-		"import": "./build/index.js",
-		"require": "./build/index.cjs"
+		".": {
+			"types": "./build/index.d.ts",
+			"import": "./build/index.js"
+		}
 	},
 	"files": [
 		"build",
@@ -34,24 +36,25 @@
 	"prettier": "@wordpress/prettier-config",
 	"devDependencies": {
 		"@eslint/compat": "^2",
-		"@wordpress/eslint-plugin": "^27",
+		"@typescript/native": "npm:typescript@^7.0.2",
 		"@wordpress/block-editor": "^18",
 		"@wordpress/components": "^42",
 		"@wordpress/compose": "^8",
+		"@wordpress/eslint-plugin": "^27",
 		"@wordpress/hooks": "^4",
 		"@wordpress/prettier-config": "^4",
 		"@wordpress/scripts": "^36",
 		"eslint": "^9",
 		"globals": "^17",
 		"prettier": "npm:wp-prettier@^3",
-		"typescript": "^6"
+		"typescript": "npm:@typescript/typescript6@^6.0.2"
 	},
 	"allowScripts": {
 		"fsevents@2.3.3": true,
 		"fsevents@2.3.2": true,
 		"@parcel/watcher@2.6.0": true,
-		"core-js@3.50.0": true,
-		"core-js-pure@3.50.0": true,
-		"unrs-resolver@1.12.2": true
+		"unrs-resolver@1.12.2": true,
+		"core-js@3.51.0": true,
+		"core-js-pure@3.51.0": true
 	}
 }
